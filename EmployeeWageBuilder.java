@@ -7,10 +7,11 @@ public class EmployeeWageBuilder {
 	public static void main(String[] args) {
 		System.out.println("welcome to employee wage programms");
 		EmployeeWageBuilder employeeCheckObject=new EmployeeWageBuilder();
-		employeeCheckObject.computeEmpWage(20, 20, 100);
+		employeeCheckObject.computeEmpWage("DMart", 20, 20, 100);
+		employeeCheckObject.computeEmpWage("Reliance", 10, 4, 100);
 	}
 	
-	public void computeEmpWage(int empRatePerHour, int numberOfWorkingDays, int maximumHrsInMonth) {
+	public void computeEmpWage(String company, int empRatePerHour, int numberOfWorkingDays, int maximumHrsInMonth) {
 		int empHrs=0;
 		int totalWorkingDays=0;
 	    int totalEmpHrs=0;
@@ -32,6 +33,6 @@ public class EmployeeWageBuilder {
 			System.out.println("Day: " + totalWorkingDays + "Emp Hr: " + empHrs);   	
 		}
 		int totalEmpWage = totalEmpHrs * empRatePerHour;
-		System.out.println("Total Emp Wage: " + totalEmpWage);
+		System.out.println("Total Emp Wage for a company: "+company +" "+ "is: "  + totalEmpWage);
 	}
 }
