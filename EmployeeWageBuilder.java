@@ -3,9 +3,6 @@ package com.bridgelab.empwages;
 public class EmployeeWageBuilder {
 	public static final int IS_PART_TIME=1;
 	public static final int IS_FULL_TIME=2;
-	public int EMP_RATE_PER_HOUR;
-	public int NUM_OF_WORKING_DAYS;
-	public int MAX_HRS_IN_MONTH;
 
 	public static void main(String[] args) {
 		System.out.println("welcome to employee wage programms");
@@ -14,9 +11,6 @@ public class EmployeeWageBuilder {
 	}
 	
 	public void computeEmpWage(int empRatePerHour, int numberOfWorkingDays, int maximumHrsInMonth) {
-		this.EMP_RATE_PER_HOUR=empRatePerHour;
-		this.NUM_OF_WORKING_DAYS=numberOfWorkingDays;
-		this.MAX_HRS_IN_MONTH=maximumHrsInMonth;
 		int empHrs=0;
 		int totalWorkingDays=0;
 	    int totalEmpHrs=0;
