@@ -4,35 +4,31 @@ public class EmployeeWageBuilder {
 	public static final int IS_PART_TIME=1;
 	public static final int IS_FULL_TIME=2;
 	
-	private final String company; 
-	private final int empRatePerHour;
-	private final int numberOfWorkingDays;
-	private final int maximumHrsInMonth;
-	private int totalEmpWage;
+	private int numOfCompany=0;
+	private CompanyEmpWage[] companyEmpWageArray;
 	
-	public EmployeeWageBuilder(String company, int empRatePerHour, int numberOfWorkingDays, int maximumHrsInMonth) {
-		this.company=company;
-		this.empRatePerHour=empRatePerHour;
-		this.numberOfWorkingDays=numberOfWorkingDays;
-		this.maximumHrsInMonth=maximumHrsInMonth;
+	public EmployeeWageBuilder() {
+		companyEmpWageArray = new CompanyEmpWage[5];
+	}
+	
+	private void  addCompanyEmpWage(String company, int empRatePerHour, int numberOfWorkingDays, int maximumHrsInMonth) {
+		companyEmpWageArray[numOfCompany] = new  CompanyEmpWage(company, empRatePerHour, numberOfWorkingDays, maximumHrsInMonth);
+		numOfCompany++;
+	}
+	
+	private void computeEmpWage() {
+		for (int i=0; i<numOfCompany; i++) {
+			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
+			System.out.println(companyEmpWageArray[i]);
+		}
 	}
 
-	public static void main(String[] args) {
-		System.out.println("welcome to employee wage programms");
-		EmployeeWageBuilder dMart=new EmployeeWageBuilder("DMart", 20, 2, 10);
-		EmployeeWageBuilder reliance=new EmployeeWageBuilder("Reliance", 20, 2, 10);
-		dMart.computeEmpWage();
-		System.out.println(dMart);
-		reliance.computeEmpWage();
-		System.out.println(reliance);
-	}
-	
-	public void computeEmpWage() {
+	private int computeEmpWage(CompanyEmpWage companyEmpWage) {
 		int empHrs=0;
 		int totalWorkingDays=0;
 	    int totalEmpHrs=0;
 	
-		while (totalEmpHrs <= maximumHrsInMonth  && totalWorkingDays < numberOfWorkingDays) {
+		while (totalEmpHrs <= companyEmpWage.getMaximumHrsInMonth()  && totalWorkingDays < companyEmpWage.getNumberOfWorkingDays()) {
 			totalWorkingDays++;
 			int empCheck =(int) Math.floor(Math.random() * 10) % 3;
 			switch (empCheck) {
@@ -48,10 +44,14 @@ public class EmployeeWageBuilder {
 			totalEmpHrs += empHrs;
 			System.out.println("Day: " + totalWorkingDays + "Emp Hr: " + empHrs);   	
 		}
-		totalEmpWage = totalEmpHrs * empRatePerHour;
+		return totalEmpHrs * companyEmpWage.getEmpRatePerHour();
 	}
-	@Override
-	public String toString() {
-		return "Total Emp Wage for a company: "+company +" "+ "is: "  + totalEmpWage;
+	
+	public static void main(String[] args) {
+		System.out.println("welcome to employee wage programms");
+		EmployeeWageBuilder employeeWageBuilder =new EmployeeWageBuilder();
+		employeeWageBuilder.addCompanyEmpWage("DMart", 20, 2, 10); 
+		employeeWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
+		employeeWageBuilder.computeEmpWage();
 	}
 }
