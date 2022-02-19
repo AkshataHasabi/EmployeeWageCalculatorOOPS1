@@ -24,11 +24,16 @@ public class EmployeeWageBuilder implements IComputeEmpWage {
 	}
 	
 	public void computeEmpWage() {
-		for (int i=0; i<numOfCompany; i++) {
+		for (int i=0; i<arrayList.size(); i++) {
 			CompanyEmpWage companyEmpWage= arrayList.get(i);
 			companyEmpWage.setTotalEmpWage(this.computeEmpWage(arrayList.get(i)));
 			System.out.println(companyEmpWage);
 		}
+	}
+	
+	public int getTotalWage(String company) {
+		
+		return hashMap.get(company).totalEmpWage;
 	}
 
 	public  int computeEmpWage(CompanyEmpWage companyEmpWage) {
